@@ -41,6 +41,7 @@ class Review(models.Model):
     text = models.CharField(max_length=1500)
     images = models.ImageField(upload_to='images/%Y/%m/%d')
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
+    is_published = models.BooleanField(default=True, verbose_name='Publish')
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now_add=True)
 
