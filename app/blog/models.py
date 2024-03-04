@@ -34,6 +34,16 @@ class Category(models.Model):
         verbose_name_plural = 'Categories'
         ordering = ['name']
 
+class TagReview(models.Model):
+    slug = models.SlugField(unique=True, max_length=50, db_index=True)
+    tag = models.CharField(max_length=60, db_index=True)
+
+    def __str__(self):
+        return self.tag
+
+    def get_absolute_url(self):
+        return reverse('tag', kwargs={'tag_slug': self.slug})
+
 
 class Review(models.Model):
     slug = models.SlugField(unique=True, max_length=50, db_index=True)
@@ -41,6 +51,7 @@ class Review(models.Model):
     text = models.CharField(max_length=1500)
     images = models.ImageField(upload_to='images/%Y/%m/%d')
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
+    tags = models.ManyToManyField('TagReview', blank=True, verbose_name='Tags')
     is_published = models.BooleanField(default=True, verbose_name='Publish')
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now_add=True)
