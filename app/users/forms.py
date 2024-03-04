@@ -8,7 +8,7 @@ from captcha.fields import CaptchaField, CaptchaTextInput
 
 class RegisterUserForm(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Username'}))
-    email = forms.EmailField(widget=forms.EmailField(attrs={'placeholder': 'Email'}))
+    email = forms.EmailField(widget=forms.TextInput(attrs={'placeholder': 'Email'}))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password'}))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat Password'}))
     captcha = CaptchaField(widget=CaptchaTextInput(attrs={'placeholder': 'CAPTCHA'}))
@@ -40,7 +40,7 @@ class ProfileUserForm(forms.ModelForm):
 
     class Meta:
         model = get_user_model()
-        fields = ['username', 'email', 'phono']
+        fields = ['photo', 'username', 'email']
 
 
 class UserPasswordChangeForm(PasswordChangeForm):
