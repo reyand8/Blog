@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import os
+import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'captcha',
     'blog',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +58,9 @@ ROOT_URLCONF = 'app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            'static/templates/',
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,8 +122,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media')
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
+AUTH_USER_MODEL = 'users.User'
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+DEFAULT_USER_IMAGE = MEDIA_URL + 'users/default.png'
+
+TESTING = bool(len(sys.argv) > 1 and sys.argv[1] == 'test')
+# When set to True, the string “PASSED” (any case) will be accepted as a valid response to any CAPTCHA. Use this for testing purposes.
+CAPTCHA_TEST_MODE = TESTING
