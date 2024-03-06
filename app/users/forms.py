@@ -18,7 +18,7 @@ class RegisterUserForm(UserCreationForm):
         fields = ['username', 'email', 'password1', 'password2']
 
     def clean_email(self):
-        email = self.cleaned_data('email')
+        email = self.cleaned_data['email']
         if get_user_model().objects.filter(email=email).exists():
             raise forms.ValidationError('This email is already registered')
         return email
