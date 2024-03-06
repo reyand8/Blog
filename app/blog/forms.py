@@ -6,12 +6,14 @@ from django.core.exceptions import ValidationError
 class AddReviewForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ['title', 'text', 'images', 'category', 'is_published']
+        fields = ['title', 'text', 'images', 'type', 'category', 'tags', 'is_published']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder': 'Title'}),
             'text': forms.Textarea(attrs={'placeholder': 'Text'}),
             'images': forms.FileInput(attrs={'placeholder': ''}),
-            'category': forms.Select(attrs={'class': ''}),
+            'type': forms.Select(attrs={'placeholder': 'Select type'}),
+            'category': forms.Select(attrs={'placeholder': 'Select category'}),
+            'tags': forms.Select(attrs={}),
             'is_published': forms.CheckboxInput(attrs={'class': ''}),
         }
 
