@@ -1,0 +1,98 @@
+{% load static %}
+{% load blog_tags %}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{title}}</title>
+		<link type="text/css" href="{% static 'css/main.css' %}" rel="stylesheet" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="shortcut icon" href="{% static '/media/main.ico' %}" type="image/x-icon"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div class="header">
+			{% block mainmenu %}
+				<div class="header_logo">
+					<img src="{% static 'img/Logo.png' %}" alt="Logo">
+					<p>Python Blog</p>
+				</div>
+				{% get_menu as menu %}
+				<div class="header_main">
+					<div class="header_1 header_main_nav">
+						{% for m in menu %}
+						<p><a href="{% url m.url_name %}">{{m.title}}</a></p>
+						{% endfor %}
+					</div>
+					<ul class="header_1 header_main_user">
+						{% if user.is_authenticated %}
+						<li>
+							<a class="header_main_user_info" href="{% url 'users:profile' %}">
+							{{user.username}}
+							{% if user.photo %}
+								<img src="{{ user.photo.url }}">
+							{% else %}
+								<img src="{{default_photo}}" alt="img">
+							{% endif %}
+							</a>
+						</li>
+						<li>
+							<form method="post" action="{% url 'users:logout' %}">
+								{% csrf_token %}
+								<button class="header_1" type="submit">Logout</button>
+							</form>
+						</li>
+						{% else %}
+						<li>
+							<a href="{% url 'users:login' %}">Login</a>
+						</li>
+						<li>
+							<a href="{% url 'users:register' %}">Registration</a>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			{% endblock mainmenu %}
+		</div>
+		<div class="main">
+			<div class="main_one">
+				<div class="sidebar">
+					<div class="categories">
+						<ul class="categories_list">
+							{% if cat_selected == 0 %}
+							<li class="sidebar_title selected">All categories</li>
+							{% else %}
+							<li class="sidebar_title"><a href="{% url 'home' %}">All categories</a></li>
+							{% endif %}
+							{% show_categories cat_selected %}
+						</ul>
+					</div>
+					<div class="tags">
+						{% show_all_tags %}
+					</div>
+				</div>
+				<div class="main_container">
+					<div>
+						{% block breadcrumbs %}
+						{% endblock %}
+					</div>
+					<div>
+						{% block content %}
+						{% endblock %}
+					</div>
+					<div>
+						{% block navigation %}
+						{% endblock %}
+					</div>
+				</div>
+
+			</div>
+
+
+		</div>
+	</body>
+</html>
+
+
+
+
