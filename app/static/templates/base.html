@@ -13,10 +13,14 @@
 	<body>
 		<div class="header">
 			{% block mainmenu %}
-				<div class="header_logo">
-					<img src="{% static 'img/Logo.png' %}" alt="Logo">
-					<p>Python Blog</p>
-				</div>
+				<a href="/home">
+					<div class="header_logo">
+
+							<img src="{% static 'img/Logo.png' %}" alt="Logo">
+						<p>Python Blog</p>
+
+					</div>
+				</a>
 				{% get_menu as menu %}
 				<div class="header_main">
 					<div class="header_1 header_main_nav">
@@ -78,6 +82,10 @@
 					</div>
 					<div>
 						{% block content %}
+						{% endblock %}
+					</div>
+					<div>
+						{% block reviews_by_cat  %}
 						{% endblock %}
 					</div>
 					<div>
