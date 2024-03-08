@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import ReviewType, Category, TagReview, Review
+from .models import TypeReview, Category, TagReview, Review
 
 
 
@@ -34,7 +34,7 @@ class ReviewAdmin(admin.ModelAdmin):
     list_filter = ('is_published', 'time_create')
     prepopulated_fields = {"slug": ("title",)}
 
-admin.site.register(ReviewType, ReviewTypeAdmin)
+admin.site.register(TypeReview, ReviewTypeAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(TagReview, TagAdmin)
 admin.site.register(Review, ReviewAdmin)
