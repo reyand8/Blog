@@ -9,5 +9,6 @@ urlpatterns = [
     path('review/<slug:review_slug>/', views.ShowReview.as_view(), name='review'),
     path('category/<slug:category_slug>/', views.ReviewCategory.as_view(), name='category'),
     path('tag/<slug:tag_slug>/', views.TagReviewList.as_view(), name='tag'),
+    path('typereview/<slug:type_slug>/', views.TypeReviewList.as_view(), name='type_review'),
     path('update/<slug:slug>/', views.UpdateReview.as_view(), name='update_review'),
 ]
