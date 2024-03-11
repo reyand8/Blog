@@ -36,7 +36,7 @@
 							{% if user.photo %}
 								<img src="{{ user.photo.url }}">
 							{% else %}
-								<img src="{{default_photo}}" alt="img">
+								<img src="{% static 'img/default.png' %}">
 							{% endif %}
 							</a>
 						</li>
@@ -61,6 +61,12 @@
 		<div class="main">
 			<div class="main_one">
 				<div class="sidebar">
+					<div class="types">
+						<ul class="types_list">
+							<li class="sidebar_title"><a href="{% url 'home' %}">All types</a></li>
+							{% show_types %}
+						</ul>
+					</div>
 					<div class="categories">
 						<ul class="categories_list">
 							{% if cat_selected == 0 %}
