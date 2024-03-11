@@ -11,7 +11,7 @@ class TypeReview(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('type', kwargs={'type_slug': self.slug})
+        return reverse('type_review', kwargs={'type_slug': self.slug})
 
     class Meta:
         verbose_name ='Type'
@@ -33,6 +33,7 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
         ordering = ['name']
+
 
 class TagReview(models.Model):
     slug = models.SlugField(unique=True, max_length=50, db_index=True)
