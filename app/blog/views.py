@@ -15,7 +15,7 @@ class Homepage(DataMixin, ListView):
     cat_selected = 0
 
     def get_queryset(self):
-        return Review.objects.all().filter(is_published=True).select_related('category')
+        return Review.published.all().select_related('category')
 
 def about_us(request):
     return render(request, 'blog/about.html',
@@ -31,13 +31,12 @@ class ShowReview(DataMixin, DetailView):
     context_object_name = 'review'
     slug_url_kwarg = 'review_slug'
 
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         return self.get_mixin_context(context, title=context['review'].title)
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Review.objects.filter(is_published=True), slug=self.kwargs[self.slug_url_kwarg])
+        return get_object_or_404(Review.published, slug=self.kwargs[self.slug_url_kwarg])
 
 
 class AddReview(LoginRequiredMixin, DataMixin, CreateView):
@@ -74,7 +73,7 @@ class ReviewCategory(DataMixin, ListView):
                                       category_selected = cat.pk)
 
     def get_queryset(self):
-        return Review.objects.filter(category__slug=self.kwargs['category_slug'],
+        return Review.published.filter(category__slug=self.kwargs['category_slug'],
                                      is_published=True).select_related('category')
 
 
@@ -89,8 +88,8 @@ class TagReviewList(DataMixin, ListView):
         return self.get_mixin_context(context, title='Tag: ' + tag.tag)
 
     def get_queryset(self):
-        return Review.objects.filter(tags__slug=self.kwargs['tag_slug'],
-                                     is_published=True).select_related('tags')
+        return Review.published.filter(
+            tags__slug=self.kwargs['tag_slug']).select_related('tags')
 
 
 class TypeReviewList(DataMixin, ListView):
@@ -105,8 +104,8 @@ class TypeReviewList(DataMixin, ListView):
                                       title='Type ' + types_review.name)
 
     def get_queryset(self):
-        return Review.objects.filter(type__slug=self.kwargs['type_slug'],
-                                     is_published=True).select_related('type')
+        return Review.published.filter(
+            type__slug=self.kwargs['type_slug']).select_related('type')
 
 def page_not_found(request, exception):
     return render(request, 'blog/NotFound.html', status=404)

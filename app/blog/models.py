@@ -1,7 +1,14 @@
 from django.contrib.auth import get_user_model
+from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
+
+
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(is_published=Review.Status.PUBLISHED)
+
 
 class TypeReview(models.Model):
     slug = models.SlugField(unique=True, max_length=20, db_index=True)
@@ -52,10 +59,21 @@ class TagReview(models.Model):
 
 
 class Review(models.Model):
+    class Status(models.IntegerChoices):
+        DRAFT = 0, 'Not Publish'
+        PUBLISHED = 1, 'Publish'
+
+
     slug = models.SlugField(unique=True, max_length=50, db_index=True)
     type = models.ForeignKey('TypeReview', default=True, on_delete=models.PROTECT)
     title = models.CharField(unique=True, max_length=50, db_index=True)
-    text = models.CharField(max_length=1500)
+    text = models.CharField(max_length=1500,
+                            validators=[
+                               MinLengthValidator(20, message="Your text must contain at "
+                                                              "least 20 characters"),
+                               MaxLengthValidator(100, message="Your text must contain no more "
+                                                              "than 1500 characters"),
+                           ])
     images = models.ImageField(upload_to='images/%Y/%m/%d')
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
     tags = models.ForeignKey('TagReview',
@@ -63,7 +81,8 @@ class Review(models.Model):
                              verbose_name='Tags',
                              on_delete=models.PROTECT,
                              related_name='tags')
-    is_published = models.BooleanField(default=True, verbose_name='Publish')
+    is_published = models.BooleanField(choices=tuple(map(lambda x: (bool(x[0]), x[1]), Status.choices)),
+                                       default=Status.DRAFT, verbose_name='Publish')
     time_create = models.DateTimeField(auto_now_add=True)
     time_update = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(get_user_model(),
@@ -72,12 +91,15 @@ class Review(models.Model):
                                null=True,
                                default=None)
 
+    objects = models.Manager()
+    published = PublishedManager()
+
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('review',
-                       kwargs={'review_slug': self.slug,})
+                       kwargs={'review_slug': self.slug})
 
     def save(self, *args, **kwargs):
         if not self.id:
