@@ -13,12 +13,10 @@
 	<body>
 		<div class="header">
 			{% block mainmenu %}
-				<a href="/home">
+				<a href="{% url 'home' %}">
 					<div class="header_logo">
-
 							<img src="{% static 'img/Logo.png' %}" alt="Logo">
 						<p>Python Blog</p>
-
 					</div>
 				</a>
 				{% get_menu as menu %}
@@ -70,9 +68,9 @@
 					<div class="categories">
 						<ul class="categories_list">
 							{% if cat_selected == 0 %}
-							<li class="sidebar_title selected">All categories</li>
+								<li class="sidebar_title selected">All categories</li>
 							{% else %}
-							<li class="sidebar_title"><a href="{% url 'home' %}">All categories</a></li>
+								<li class="sidebar_title"><a href="{% url 'home' %}">All categories</a></li>
 							{% endif %}
 							{% show_categories cat_selected %}
 						</ul>
