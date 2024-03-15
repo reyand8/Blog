@@ -10,6 +10,7 @@
             <p class="auth_form_input">{{ form.username }}</p>
             <p class="auth_form_input">{{ form.password }}</p>
             <button class="form_btn" type="submit">Submit</button>
+            <a href="{% url 'users:password_reset' %}">Reset password</a>
         </form>
     </div>
 
