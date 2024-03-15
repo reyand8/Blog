@@ -4,7 +4,6 @@ from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.views.generic import CreateView, UpdateView
 from .forms import RegisterUserForm, LoginUserForm, ProfileUserForm, UserPasswordChangeForm
 from django.urls import reverse_lazy
-from ..app import settings
 
 
 class RegisterUser(CreateView):
@@ -19,6 +18,9 @@ class LoginUser(LoginView):
     template_name = 'users/login.html'
     extra_context = {'title': 'Login'}
 
+    def get_success_url(self):
+        return reverse_lazy('home')
+
 
 class ProfileUser(LoginRequiredMixin, UpdateView):
     form_class = ProfileUserForm
@@ -26,7 +28,6 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
     template_name =  'users/profile.html'
     extra_context = {
         'title': 'Profile',
-        'default_image': settings.DEFAULT_USER_IMAGE
     }
 
     def get_success_url(self):
@@ -38,6 +39,5 @@ class ProfileUser(LoginRequiredMixin, UpdateView):
 
 class UserPasswordChange(PasswordChangeView):
     form_class = UserPasswordChangeForm
+    template_name = 'users/password/password_change_form.html'
     success_url = reverse_lazy('users:password_change_done')
-
-
