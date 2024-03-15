@@ -44,7 +44,7 @@ class ProfileUserForm(forms.ModelForm):
 
 
 class UserPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(label='Your password')
-    new_password1 = forms.CharField(label='New password')
-    new_password2 = forms.CharField(label='Repeat new password')
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Your password'}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'New password'}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat new password'}))
 
