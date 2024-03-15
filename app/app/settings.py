@@ -155,10 +155,10 @@ LOGIN_URL = 'users:login'
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST = ""
 EMAIL_PORT = 465
-EMAIL_HOST_USER = "reyand.ua@gmail.com"
-EMAIL_HOST_PASSWORD = "vlnj lvyu xhqb zeze"
+EMAIL_HOST_USER = ""
+EMAIL_HOST_PASSWORD = ""
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
