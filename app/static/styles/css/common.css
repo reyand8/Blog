@@ -1,0 +1,29 @@
+.header_1 {
+    font-size: 21px;
+    font-weight: 400;
+}
+
+.form_title {
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.form_btn {
+    background-color: #7e7eea;
+    padding: 14px 42px;
+    border-radius: 20px;
+    color: white;
+
+}
+
+.help_btn {
+    font-size: 14px;
+    color: #605e5e;
+}
+
+.form_error  li{
+    max-width: 372px;
+    width: 100%;
+    font-size: 16px;
+    color: #9d1010;
+}

@@ -116,20 +116,27 @@
   width: 100%;
   margin: 70px 0 0 50px;
 }
-.auth_form_error {
-  max-width: 372px;
-  width: 100%;
-  font-size: 16px;
-}
-.auth_form_error ul, .auth_form_error li {
-  color: #9d1010;
-}
 .auth_form_input input {
   border: 1px solid black;
   border-radius: 14px;
   padding: 9px;
   max-width: 185px;
   width: 100%;
+}
+.auth_form_input__label {
+  display: flex;
+}
+.auth_form_input__label label {
+  width: 245px;
+}
+
+.form_recovery {
+  display: flex;
+  align-items: center;
+  margin-bottom: 22px;
+}
+.form_recovery :first-child {
+  margin-right: 10px;
 }
 
 .form_review_error {
@@ -146,6 +153,9 @@
   max-width: 427px;
   width: 100%;
   padding: 6px;
+}
+.form_review .add_title input {
+  width: 242px;
 }
 .form_review .add_text textarea {
   height: 300px;
@@ -243,8 +253,8 @@
   max-width: 320px;
   width: 100%;
 }
-.profile_form_img {
-  width: 120px;
+.profile_form_img img {
+  width: 270px;
 }
 .profile_form button {
   margin-top: 20px;
