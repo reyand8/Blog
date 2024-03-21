@@ -8,6 +8,11 @@ django = "*"
 django-simple-captcha = "*"
 django-recaptcha = "*"
 captcha = "*"
+faker = "*"
+pytest-django = "*"
+django-debug-toolbar = "*"
+pytest-factoryboy = "*"
+factory-boy = "*"
 
 [dev-packages]
 
