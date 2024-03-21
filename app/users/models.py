@@ -3,5 +3,5 @@ from django.db import models
 
 
 class User(AbstractUser):
-    photo = models.ImageField("users/%Y/%m/%d/", blank=True, null=True)
+    photo = models.ImageField("users/", blank=True, null=True)
 
