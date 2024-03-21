@@ -74,7 +74,7 @@ class Review(models.Model):
                                MaxLengthValidator(100, message="Your text must contain no more "
                                                               "than 1500 characters"),
                            ])
-    images = models.ImageField(upload_to='images/%Y/%m/%d')
+    images = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True, default=None)
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
     tags = models.ForeignKey('TagReview',
                              blank=True,
