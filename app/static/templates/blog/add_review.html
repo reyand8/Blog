@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <p class="form_title">{{title}}</p>
+    <form action="{% url 'addreview' %}" method="post" class="form_review" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form_error">{{ form.errors }}</div>
+        <div class="form_error">{{ form.non_field_errors }}</div>
+        <p class="add_title form_review_input">{{ form.title }}</p>
+        <p class="add_text form_review_input">{{ form.text }}</p>
+        <p class="add_image">{{ form.images }}</p>
+        <div>
+            <p class="form_review_label">Type:</p>
+            <p class="form_review_select">{{ form.type }}</p>
+        </div>
+        <div>
+            <p class="form_review_label">Category:</p>
+            <p class="form_review_select">{{ form.category }}</p>
+        </div>
+        <div>
+            <p class="form_review_label">Tag:</p>
+            <p class="form_review_select select_tag">{{ form.tags }}</p>
+        </div>
+        <div class="form_review_select form_review_publish">
+            {{ form.is_published }}
+        </div>
+        <button class="form_btn" type="submit">Submit</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+
+	{% for r in reviews %}
+			<div class="review">
+				<div class="review_header">
+					<p>Category: {{r.category.name}}</p>
+					<p>Author: {{r.author.username|default:'Unknown'}}</p>
+				</div>
+				<div class="review_line"></div>
+				<div class="review_content">
+					<div class="review_content_main">
+						<h2>{{r.title}}</h2>
+						{% if r.images %}
+							<img src="{{r.images.url}}" alt="">
+						{% endif %}
+						<p>
+							{% autoescape off %}
+							{{r.text|linebreaks|truncatewords:9}}
+							{% endautoescape %}
+						</p>
+
+					</div>
+					<div class="review_content_btn">
+						<button class="review_btn">
+							<a href="{{ r.get_absolute_url }}">Read more</a>
+						</button>
+					</div>
+					<div class="review_line"></div>
+					<div class="review_content_update">
+						<p>Time update: {{r.time_update|date:"d-m-Y"}}</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+    <div class="review">
+				<div class="review_header">
+					<p>Category: {{review.category.name}}</p>
+					<p>Author: {{review.author.username|default:'Unknown'}}</p>
+				</div>
+				<div class="review_line"></div>
+				<div class="review_content">
+					<div class="review_content_main">
+						<h2>{{review.title}}</h2>
+						{% if review.images %}
+							<img src="{{review.images.url}}" alt="">
+						{% endif %}
+						<div class="review_content_main_text">
+							{% autoescape off %}
+								{{review.text}}
+							{% endautoescape %}
+						</div>
+					</div>
+					<div class="review_line"></div>
+					<div class="review_content_update">
+						<p>Time update: {{review.time_update|date:"d-m-Y"}}</p>
+					</div>
+				</div>
+			</div>
+{% endblock %}

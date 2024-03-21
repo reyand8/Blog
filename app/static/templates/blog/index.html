@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+<div>
+	{% block reviews_by_cat  %}
+	{% endblock %}
+	{% block content %}
+		{% for r in reviews %}
+			<div class="review">
+				<div class="review_header">
+					<p>Category: {{r.category.name}}</p>
+					<p>Author: {{r.author.username|default:'Unknown'}}</p>
+				</div>
+				<div class="review_line"></div>
+				<div class="review_content">
+					<div class="review_content_main">
+						<h2>{{r.title}}</h2>
+						{% if r.images %}
+							<img src="{{r.images.url}}" alt="">
+						{% endif %}
+						<p>
+							{% autoescape off %}
+							{{r.text|linebreaks|truncatewords:9}}
+							{% endautoescape %}
+						</p>
+
+					</div>
+
+					<div class="review_content_btn">
+						{% if r.author.username == request.user.username %}
+							<a href="{% url 'update_review' r.slug %}">
+								<img class="review_content_btn_edit" src="{% static 'img/edit.svg' %}" alt="edit">
+							</a>
+						{% endif %}
+						<button class="review_btn">
+							<a href="{{ r.get_absolute_url }}">Read more</a>
+						</button>
+					</div>
+					<div class="review_line"></div>
+					<div class="review_content_update">
+						<p>Time update: {{r.time_update|date:"d-m-Y"}}</p>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	{% endblock %}
+
+</div>
+<div>
+	{% block navigation %}
+		{% if page_obj.has_other_pages %}
+			<ul class="pagination_list">
+				{% if page_obj.has_previous %}
+					<li>
+						<a href="?page={{ page_obj.previous_page_number }}">&lt;</a>
+					</li>
+				{% endif %}
+				{% for p in paginator.page_range %}
+					{% if page_obj.number == p %}
+						<li>{{ p }}</li>
+					{% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}
+						<li>
+							<a href="?page={{ p }}">{{ p }}</a>
+						</li>
+					{% endif %}
+				{% endfor %}
+				{% if page_obj.has_next %}
+					<li>
+						<a href="?page={{ page_obj.next_page_number }}">&gt;</a>
+					</li>
+				{% endif %}
+			</ul>
+
+		{% endif %}
+	{% endblock %}
+</div>

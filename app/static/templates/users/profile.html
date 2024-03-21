@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="profile">
+        <h4>Profile</h4>
+        <form method="post" class="profile_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="profile_form_img">
+                {% if user.photo %}
+                    <img src="{{ user.photo.url }}">
+                {% else %}
+                    <img src="{% static 'img/default.png' %}">
+                {% endif %}
+            </div>
+            <div class="form_error">{{ form.errors }}</div>
+            <div class="form_error">{{ form.non_field_errors }}</div>
+            <div class="profile_form_inputs_main">
+                <div class="add_image">
+                    {{form.photo}}
+                </div>
+                <div class="profile_form_inputs">
+                    <p>Username</p>
+                    {{ form.username }}
+                    <p>Email</p>
+                    {{ form.email }}
+                </div>
+            </div>
+            <div class="form-error">
+                {{ f.errors }}
+            </div>
+            <button class="form_btn" type="submit">Save</button>
+        </form>
+        <a class="help_btn" href="{% url 'users:password_change' %}">Change password</a>
+
+    </div>
+{% endblock %}

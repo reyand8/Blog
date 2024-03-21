@@ -5,13 +5,14 @@
         <p class="form_title">Log in</p>
         <form class="auth_form" method="post">
             {% csrf_token %}
+            <div class="form_error">{{ form.errors }}</div>
             <input type="hidden" name="next" value="{{ next }}" />
             <div class="auth_form_error">{{ form.non_field_errors }}</div>
             <p class="auth_form_input">{{ form.username }}</p>
             <p class="auth_form_input">{{ form.password }}</p>
             <button class="form_btn" type="submit">Submit</button>
-            <a href="{% url 'users:password_reset' %}">Reset password</a>
         </form>
+            <a class="help_btn" href="{% url 'users:password_reset' %}">Reset password</a>
     </div>
 
 {% endblock %}

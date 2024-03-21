@@ -1,0 +1,5 @@
+{% for type_review in types_review %}
+  <li class="types_item">
+      <a href="{{ type_review.get_absolute_url }}">{{type_review.name}}</a>
+  </li>
+{% endfor %}

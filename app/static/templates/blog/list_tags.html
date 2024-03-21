@@ -1,0 +1,10 @@
+{% if tags %}
+    <p class="sidebar_title">Tags</p>
+    <div class="tags_list">
+        {% for t in tags %}
+            <div class="tags_item">
+                <a href="{{t.get_absolute_url}}">{{t.tag}}</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

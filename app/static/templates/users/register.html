@@ -5,14 +5,14 @@
         <p class="form_title">{{title}}</p>
         <form class="auth_form" method="post">
             {% csrf_token %}
+            <div class="form_error">{{ form.errors }}</div>
             <input type="hidden" name="next" value="{{ next }}" />
-            <div class="auth_form_error">{{ form.non_field_errors }}</div>
             <p class="auth_form_input">{{ form.username }}</p>
             <p class="auth_form_input">{{ form.email }}</p>
             <p class="auth_form_input">{{ form.password1 }}</p>
             <p class="auth_form_input">{{ form.password2 }}</p>
             <p>{{ form.captcha }}</p>
-            <button class="auth_form_btn" type="submit">Submit</button>
+            <button class="form_btn" type="submit">Submit</button>
         </form>
     </div>
 {% endblock %}
