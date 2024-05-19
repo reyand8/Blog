@@ -32,3 +32,5 @@ class AddReviewForm(forms.ModelForm):
         if len(text) < 20:
             raise ValidationError("Your text can't be less than 20 symbols")
         return text
+
+
