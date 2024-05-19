@@ -10,7 +10,7 @@
     1. [Homepage](#Homepage)
     2. [Review details](#Review-details)
     3. [Create and Edit review](#Create-and-Edit-review)
-    4. [Registration-and-Login](#Registration-and-Login)
+    4. [Registration and Login](#Registration-and-Login)
     5. [Profile](#Profile)
     6. [Password recovery and Password change](#Password-recovery-and-Password-change)
 
