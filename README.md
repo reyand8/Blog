@@ -7,14 +7,12 @@
 3. [Stack](#Stack)
 4. [Installation and Usage](#Installation-and-Usage)
 5. [Examples](#Examples)
-    1. [Homepage and Product List](#Homepage-and-Product-List)
-    2. [Single item](#Single-item)
-    3. [Single category with filter](#Single-category-with-filter)
-    4. [Search bar](#Search-bar)
-    5. [Wishlist and basket](#Wishlist-and-basket)
-    6. [Recommendations](#Recommendations)
-    7. [User Authentication and Profile](#User-Authentication-and-Profile)
-
+    1. [Homepage](#Homepage)
+    2. [Review details](#Review-details)
+    3. [Create and Edit review](#Create-and-Edit-review)
+    4. [Registration-and-Login](#Registration-and-Login)
+    5. [Profile](#Profile)
+    6. [Password recovery and Password change](#Password-recovery-and-Password-change)
 
 ____
 
