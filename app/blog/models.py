@@ -67,12 +67,12 @@ class Review(models.Model):
     slug = models.SlugField(unique=True, max_length=50, db_index=True)
     type = models.ForeignKey('TypeReview', default=True, on_delete=models.PROTECT)
     title = models.CharField(unique=True, max_length=50, db_index=True)
-    text = models.CharField(max_length=1500,
+    text = models.CharField(max_length=3500,
                             validators=[
                                MinLengthValidator(20, message="Your text must contain at "
                                                               "least 20 characters"),
-                               MaxLengthValidator(100, message="Your text must contain no more "
-                                                              "than 1500 characters"),
+                               MaxLengthValidator(3500, message="Your text must contain no more "
+                                                              "than 3500 characters"),
                            ])
     images = models.ImageField(upload_to='images/%Y/%m/%d', blank=True, null=True, default=None)
     category = models.ForeignKey('Category', on_delete=models.PROTECT)
